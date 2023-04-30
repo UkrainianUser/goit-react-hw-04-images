@@ -9,9 +9,6 @@ export default function Modal({onClose, children}) {
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-    }
   }, [onKeyDown]);
 
   const onKeyDown = (evt) => {
