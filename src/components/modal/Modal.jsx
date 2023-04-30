@@ -9,7 +9,7 @@ export default function Modal({onClose, children}) {
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
-  }, [onKeyDown]);
+  }, []);
 
   const onKeyDown = (evt) => {
     if (evt.code === "Escape") {
