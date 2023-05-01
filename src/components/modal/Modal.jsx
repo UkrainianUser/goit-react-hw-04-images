@@ -30,12 +30,6 @@ export default function Modal({onClose, children}) {
     return createPortal(
       <div className={css.overlay} onClick={onBackdropClick}>
         <div className={css.modal}>
-					<button
-            type="button"
-            className={css.button}
-            onClick={onClose}
-          >Close
-          </button>
           {children}
         </div>
       </div>,

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Searchbar from './searchbar/Searchbar';
 import ImageGallery from './imageGallery/ImageGallery';
 import Button from './button/Button';
@@ -6,6 +6,7 @@ import Modal from './modal/Modal';
 import css from './App.module.css';
 import api from '../services/imagesApi';
 import Loader from './loader/Loader';
+import Notiflix from 'notiflix';
 
 export default function App() {
 
@@ -16,9 +17,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showLoadMore, setShowLoadMore] = useState(false);
   const [urlModal, setUrlModal] = useState('');
-  
-  const prevSearchQuery = useRef('');
-  const prevPage = useRef(1);
 
   const handleFormSubmit = query => {
     setSearchQuery(query);
@@ -33,8 +31,11 @@ export default function App() {
     try {
       const response = await api.fetchApi(searchQuery, page);
 
+      if (response.totalHits === 0) {
+        Notiflix.Notify.warning(`Nothing was found for ${searchQuery}`)
+      }
       setImages((prevImages) => [...prevImages, ...response.hits]);
-      setShowLoadMore(response.totalHits && page < Math.ceil(response.totalHits / 12));
+      setShowLoadMore(page < Math.ceil(response.totalHits / 12));
     } catch (error) {
       console.log(error);;
     } finally {
@@ -44,16 +45,10 @@ export default function App() {
   };
   
   useEffect(() => {
-    if (prevSearchQuery.current !== searchQuery || prevPage.current !== page) {
+    if (searchQuery !== '') {
       handleGetImages(searchQuery, page);
     }
-    prevSearchQuery.current = searchQuery;
-    prevPage.current = page;
   }, [searchQuery, page]);
-
-  const toggleOnLoading = () => {
-    setIsLoading(!isLoading);
-  };
   
   const onLoadMore = () => {
     setPage(page + 1);
@@ -73,14 +68,13 @@ export default function App() {
       <div className={css.app}>
         <Searchbar onSubmit={handleFormSubmit}/>
         <ImageGallery 
-          images={images} openModal={openModal} toggleOnLoading={toggleOnLoading}
+          images={images} openModal={openModal}
         />
         {showLoadMore && <Button onLoadMore={onLoadMore} />}
         {isLoading && <Loader />}
         {showModal && (
           <Modal onClose={closeModal}>
             <img
-              onLoad={toggleOnLoading}
               src={urlModal}
               alt=""
               className={css['modal-img']}

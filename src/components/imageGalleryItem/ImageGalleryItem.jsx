@@ -2,7 +2,7 @@ import React from 'react';
 import css from './ImageGalleryItem.module.css';
 import PropTypes from "prop-types";
 
-const ImageGalleryItem = ({webformatURL, largeImageURL, tags, openModal, toggleOnLoading,}) => {
+const ImageGalleryItem = ({webformatURL, largeImageURL, tags, openModal}) => {
   return (
     <li className={css['gallery__item']}>
       <img
@@ -12,7 +12,6 @@ const ImageGalleryItem = ({webformatURL, largeImageURL, tags, openModal, toggleO
         alt={tags}
         onClick={(evt) => {
           openModal(evt.currentTarget.dataset.large);
-          toggleOnLoading();
         }}
       />
     </li>
@@ -25,6 +24,5 @@ ImageGalleryItem.propTypes = {
   webformatURL: PropTypes.string.isRequired,
   largeImageURL: PropTypes.string.isRequired,
   tags: PropTypes.string.isRequired,
-  toggleOnLoading: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
 };

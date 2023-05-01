@@ -5,22 +5,22 @@ import PropTypes from "prop-types";
 
 export default function Searchbar ({onSubmit}) {
 
-  const [searchQuery, setSearchQuery] = useState('');
+const [searchQuery, setSearchQuery] = useState('');
 
 const handleQueryChange = evt => {
   setSearchQuery(evt.currentTarget.value.toLowerCase());
 }
 
 const handleSubmit = evt => {
-    evt.preventDefault();
+  evt.preventDefault();
 
-    if(searchQuery.trim() === '') {
-        Notiflix.Notify.warning("Please enter search query");
-        return;
-    }
+  if(searchQuery.trim() === '') {
+    Notiflix.Notify.warning('Please enter search query');
+    return;
+  }
 
-    onSubmit(searchQuery);
-    setSearchQuery('');
+  onSubmit(searchQuery);
+
 }
 
     return (
