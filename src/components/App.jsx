@@ -13,8 +13,6 @@ export default function App() {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  // const [isEmpty, setIsEmpty] = useState(false);
-  // const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showLoadMore, setShowLoadMore] = useState(false);
   const [urlModal, setUrlModal] = useState('');
@@ -27,8 +25,6 @@ export default function App() {
     setImages([]);
     setPage(1);
     setShowLoadMore(false);
-    // setIsEmpty(false);
-    // setError('');
   };
   
   const handleGetImages = async (searchQuery, page) => {
@@ -36,10 +32,7 @@ export default function App() {
     
     try {
       const response = await api.fetchApi(searchQuery, page);
-      // if (!response.hits.length) {
-      //   setIsEmpty(true);
-      //   return;
-      // }
+
       setImages((prevImages) => [...prevImages, ...response.hits]);
       setShowLoadMore(response.totalHits && page < Math.ceil(response.totalHits / 12));
     } catch (error) {
