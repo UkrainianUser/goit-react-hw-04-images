@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 
 const ImageGallery = ({ images, openModal }) => {
-  console.log(images);
   return (
     <ul className={css.gallery}>
       {images.map(({ id, webformatURL, largeImageURL, tags }) => (

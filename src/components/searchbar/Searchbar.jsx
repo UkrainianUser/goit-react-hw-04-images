@@ -9,7 +9,7 @@ const [searchQuery, setSearchQuery] = useState('');
 
 const handleQueryChange = evt => {
   setSearchQuery(evt.currentTarget.value.toLowerCase());
-}
+};
 
 const handleSubmit = evt => {
   evt.preventDefault();
@@ -21,7 +21,7 @@ const handleSubmit = evt => {
 
   onSubmit(searchQuery);
 
-}
+};
 
     return (
         <header className={css.searchbar}>
@@ -42,7 +42,7 @@ const handleSubmit = evt => {
         </form>
       </header>
           );
-}
+};
 
 
 Searchbar.propTypes = {

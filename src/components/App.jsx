@@ -38,7 +38,8 @@ export default function App() {
       setImages((prevImages) => [...prevImages, ...response.hits]);
       setShowLoadMore(page < Math.ceil(response.totalHits / 12));
     } catch (error) {
-      console.log(error);;
+      Notiflix.Notify.failure('Sorry, something went wrong!');
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
