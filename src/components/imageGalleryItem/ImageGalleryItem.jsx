@@ -11,7 +11,7 @@ const ImageGalleryItem = ({webformatURL, largeImageURL, tags, openModal}) => {
         data-large={largeImageURL}
         alt={tags}
         onClick={(evt) => {
-          openModal(evt.currentTarget.dataset.large);
+          openModal(evt.currentTarget.dataset.large, evt.currentTarget.alt);
         }}
       />
     </li>

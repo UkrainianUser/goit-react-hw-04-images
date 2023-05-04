@@ -17,6 +17,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showLoadMore, setShowLoadMore] = useState(false);
   const [urlModal, setUrlModal] = useState('');
+  const [tags, setTags] = useState('');
 
   const handleFormSubmit = query => {
     setSearchQuery(query);
@@ -54,14 +55,16 @@ export default function App() {
     setPage(page + 1);
   };
   
-  const openModal = (url) => {
+  const openModal = (url, tags) => {
     setShowModal(true);
     setUrlModal(url);
+    setTags(tags);
   };
 
   const closeModal = () => {
     setShowModal(false);
     setUrlModal('');
+    setTags('');
   };
 
     return (
@@ -73,10 +76,10 @@ export default function App() {
         {showLoadMore && <Button onLoadMore={onLoadMore} />}
         {isLoading && <Loader />}
         {showModal && (
-          <Modal onClose={closeModal}>
+          <Modal onClose={closeModal} tags={tags}>
             <img
               src={urlModal}
-              alt=""
+              alt={tags}
               className={css['modal-img']}
             />
           </Modal>
