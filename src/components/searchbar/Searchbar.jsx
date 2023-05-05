@@ -6,9 +6,11 @@ import PropTypes from "prop-types";
 export default function Searchbar ({onSubmit}) {
 
 const [searchQuery, setSearchQuery] = useState('');
+const [disabledBtn, setDisabledBtn] = useState(false);
 
 const handleQueryChange = evt => {
   setSearchQuery(evt.currentTarget.value.toLowerCase());
+  setDisabledBtn(false);
 };
 
 const handleSubmit = evt => {
@@ -20,6 +22,7 @@ const handleSubmit = evt => {
   }
 
   onSubmit(searchQuery);
+  setDisabledBtn(true);
 
 };
 
@@ -36,7 +39,7 @@ const handleSubmit = evt => {
             onChange={handleQueryChange}
             value={searchQuery}
           />
-          <button type="submit" className={css.button}>
+          <button type="submit" className={css.button} disabled={disabledBtn}>
             <span className={css['button__label']}>Search</span>
           </button>
         </form>
