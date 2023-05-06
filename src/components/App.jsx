@@ -77,7 +77,7 @@ export default function App() {
         {showLoadMore && <Button onLoadMore={onLoadMore} />}
         {isLoading && <Loader />}
         {showModal && (
-          <Modal onClose={closeModal} tags={tags}>
+          <Modal onClose={closeModal}>
             <img
               src={urlModal}
               alt={tags}
